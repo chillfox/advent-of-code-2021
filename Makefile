@@ -1,6 +1,6 @@
 .RECIPEPREFIX = >
 
-.PHONY: run build format check
+.PHONY: run build format check clean
 
 day = 1
 name = day_$$(printf "%02d" ${day})
@@ -16,3 +16,6 @@ format:
 
 check:
 >   @ameba
+
+clean:
+>   @rm bin/*
