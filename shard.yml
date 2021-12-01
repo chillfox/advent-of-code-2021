@@ -1,0 +1,12 @@
+name: advent-of-code-2021
+version: 0.1.0
+
+authors:
+  - Mia Bennett <mia@chillfox.com>
+
+crystal: ">= 1.0, < 2.0"
+
+description: |
+  Advent of Code 2021 in Crystal
+
+license: MIT
