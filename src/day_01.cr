@@ -48,15 +48,14 @@ File.each_line(path) do |line|
   window << depth
   window.shift if window.size > 4
 
-
   if window.size == 4
-    if window[0,3].sum < window[1,4].sum
-      puts "#{window[1,4].sum} (increased)"
+    if window[0, 3].sum < window[1, 4].sum
+      puts "#{window[1, 4].sum} (increased)"
       increases += 1
-    elsif window[0,3].sum > window[1,4].sum
-      puts "#{window[1,4].sum} (decreased)"
+    elsif window[0, 3].sum > window[1, 4].sum
+      puts "#{window[1, 4].sum} (decreased)"
     else
-      puts "#{window[1,4].sum} (no change)"
+      puts "#{window[1, 4].sum} (no change)"
     end
   elsif window.size == 3
     puts "#{window.sum} (N/A - no previous sum)"
