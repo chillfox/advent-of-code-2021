@@ -10,3 +10,9 @@ make run day=1
 make build day=1
 bin/day_01 data/day_01.txt
 ```
+
+## Links
+
+- [Advent of Code](https://adventofcode.com/2021)
+- [GitHub repository](https://github.com/chillfox/advent-of-code-2021)
+- [Replit repl](https://replit.com/@MiaChillfox/advent-of-code-2021)
