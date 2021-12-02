@@ -9,6 +9,7 @@ run:
 >   @crystal run src/${name}.cr
 
 build:
+>   @mkdir --parents bin
 >   @crystal build --release -o bin/${name} src/${name}.cr
 
 format:
@@ -18,4 +19,4 @@ check:
 >   @ameba
 
 clean:
->   @rm bin/*
+>   @rm --dir --recursive bin
