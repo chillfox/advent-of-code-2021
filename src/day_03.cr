@@ -28,7 +28,7 @@ gamma = rate.map { |r| r > numbers / 2 ? 1 : 0 }
 epsilon = rate.map { |r| r < numbers / 2 ? 1 : 0 }
 power = gamma.join.to_i(2) * epsilon.join.to_i(2)
 
-puts power
+puts power # 198
 
 ####################
 # Second Challenge #
@@ -49,13 +49,13 @@ def find_rating(bits, low = false)
   if bits.size > 1
     count = bits.transpose.first.tally.to_a.sort_by { |k, v| v }
 
+    bit = count.first.last == count.last.last ? 1 : count.last.first
+
     if low
-      bit = count.first.last == count.last.last ? 0 : count.first.first
-    else
-      bit = count.first.last == count.last.last ? 1 : count.last.first
+      bit = bit == 1 ? 0 : 1
     end
 
-    keep = bits.select { |b| b.first == bit }
+    keep = bits.select { |b| b.first == bit }.clone
     keep.map { |b| b.shift }
 
     [bit] + find_rating keep, low
@@ -64,10 +64,10 @@ def find_rating(bits, low = false)
   end
 end
 
-oxygen = find_rating(report.clone).join.to_i 2
+oxygen = find_rating(report).join.to_i 2
 puts "Oxygen: #{oxygen}" # 10111 / 23
 
-co2 = find_rating(report.clone, true).join.to_i 2
+co2 = find_rating(report, true).join.to_i 2
 puts "CO2: #{co2}" # 01010 / 10
 
-puts "Life Support: #{oxygen * co2}"
+puts "Life Support: #{oxygen * co2}" # 230
