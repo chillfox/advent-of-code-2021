@@ -1,1 +1,10 @@
 run = "make run day=$(ls src/ | wc -w)"
+entrypoint = "src/day_$(printf '%02d' $(ls src/ | wc -w)).cr"
+
+language="crystal"
+
+[languages.crystal]
+pattern = "**/*.cr"
+
+[languages.yaml]
+pattern = "*.yml"

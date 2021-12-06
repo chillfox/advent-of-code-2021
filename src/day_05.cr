@@ -8,38 +8,71 @@ def map_vents(path, diagonal = false)
     raise "NO MATCH" unless match = REGEX.match(line)
     x1, y1, x2, y2 = match.captures.map &.as(String).to_i64
 
-    if x1 == x2
-      # vertical line
+    if x1 == x2 # vertical
       # pp "(#{x1}): #{y1} -> #{y2}"
-
-      if y1 <= y2
+      if y1 <= y2 # top to bottom
         (y1..y2).each do |y|
           vents[y] ||= Hash(Int64, Int64).new
           vents[y][x1] = vents[y][x1]? ? vents[y][x1] + 1 : 1_i64
         end
-      else
+      else # bottom to top
         (y2..y1).each do |y|
           vents[y] ||= Hash(Int64, Int64).new
           vents[y][x1] = vents[y][x1]? ? vents[y][x1] + 1 : 1_i64
         end
       end
-    elsif y1 == y2
-      # horizontal line
+    elsif y1 == y2 # horizontal
       # pp "(#{y1}): #{x1} -> #{x2}"
-
       y = vents[y1] ||= Hash(Int64, Int64).new
-      if x1 <= x2
+      if x1 <= x2 # left to right
         (x1..x2).each do |x|
           y[x] = y[x]? ? y[x] + 1 : 1_i64
         end
-      else
+      else # right to left
         (x2..x1).each do |x|
           y[x] = y[x]? ? y[x] + 1 : 1_i64
         end
       end
-    elsif diagonal && x1 != x2 && y1 != y2
-      # diagonal lines
-      pp "#{x1},#{y1} -> #{x2}, #{y2}"
+    elsif diagonal && x1 != x2 && y1 != y2 # diagonal
+      # pp "#{x1},#{y1} -> #{x2}, #{y2}"
+
+      if y1 <= y2 && x1 <= x2 # top to bottom, left to right
+        # pp "top to bottom, left to right"
+        (y1..y2).each_with_index do |y, i|
+          if (x1..x2).includes? x1 + i
+            # pp "y#{y},x#{x1 + i}"
+            vents[y] ||= Hash(Int64, Int64).new
+            vents[y][x1 + i] = vents[y][x1 + i]? ? vents[y][x1 + i] + 1 : 1_i64
+          end
+        end
+      elsif y1 <= y2 && x1 > x2 # top to bottom, right to left
+        # pp "top to bottom, right to left"
+        (y1..y2).each_with_index do |y, i|
+          if (x2..x1).includes? x1 - i
+            # pp "y#{y},x#{x1 - i}"
+            vents[y] ||= Hash(Int64, Int64).new
+            vents[y][x1 - i] = vents[y][x1 - i]? ? vents[y][x1 - i] + 1 : 1_i64
+          end
+        end
+      elsif y1 > y2 && x1 <= x2 # bottom to top, left to right
+        # pp "bottom to top, left to right"
+        (y2..y1).each_with_index do |y, i|
+          if (x1..x2).includes? x2 - i
+            # pp "y#{y},x#{x2 - i}"
+            vents[y] ||= Hash(Int64, Int64).new
+            vents[y][x2 - i] = vents[y][x2 - i]? ? vents[y][x2 - i] + 1 : 1_i64
+          end
+        end
+      else # bottom to top, right to left
+        # pp "bottom to top, right to left"
+        (y2..y1).each_with_index do |y, i|
+          if (x2..x1).includes? x2 + i
+            # pp "y#{y},x#{x2 + i}"
+            vents[y] ||= Hash(Int64, Int64).new
+            vents[y][x2 + i] = vents[y][x2 + i]? ? vents[y][x2 + i] + 1 : 1_i64
+          end
+        end
+      end
     end
   end
   vents
