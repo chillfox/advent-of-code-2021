@@ -42,3 +42,4 @@ puts "\n"
 
 # TODO: write something that is more memory efficint
 # maybe handle the generations of each fish one at a time instead of iterating over all of the fish...
+# or forget about the fish and just count how many of each age, then do math on that
