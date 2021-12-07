@@ -11,7 +11,7 @@ puts "First Challenge"
 puts "########################################"
 puts "\n"
 
-def age_fish(fish, days) : Array(Int8)
+def age_fish(fish : Array(Int8), days : Int32) : Array(Int8)
   return fish if days == 0
   new_fish = [] of Int8
 
@@ -38,8 +38,24 @@ puts "Second Challenge"
 puts "########################################"
 puts "\n"
 
-# puts "lanternfish: #{age_fish(lanternfish, 265).size}" # 26984457539
+def age_fish(fish : Hash(Int8, Int64), days : Int32) : Hash(Int8, Int64)
+  return fish if days == 0
 
-# TODO: write something that is more memory efficint
-# maybe handle the generations of each fish one at a time instead of iterating over all of the fish...
-# or forget about the fish and just count how many of each age, then do math on that
+  new_fish = Hash(Int8, Int64).new
+  9_i8.times do |age|
+    next unless fish[age]?
+
+    if age > 0
+      new_fish[age - 1] = new_fish[age - 1]? ? new_fish[age - 1] + fish[age] : fish[age]
+    else
+      new_fish[6_i8] = new_fish[6_i8]? ? new_fish[6_i8] + fish[age] : fish[age]
+      new_fish[8_i8] = fish[age]
+    end
+  end
+
+  age_fish new_fish, days - 1
+end
+
+fish_tally = lanternfish.tally.map { |k, v| {k, v.to_i64} }.to_h
+fish_count = age_fish(fish_tally, 256).values.sum
+puts "lanternfish: #{fish_count}" # 26984457539

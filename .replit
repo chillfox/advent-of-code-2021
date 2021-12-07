@@ -1,5 +1,5 @@
 run = "make run day=$(ls src/ | wc -w)"
-entrypoint = "src/day_$(printf '%02d' $(ls src/ | wc -w)).cr"
+entrypoint = "src/day_06.cr"
 
 language="crystal"
 
