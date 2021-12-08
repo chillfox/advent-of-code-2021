@@ -28,12 +28,14 @@ puts "Second Challenge"
 puts "########################################"
 puts "\n"
 
+# require "big"
+
 # crabs.sum / crabs.size
-# 4.9 on test data (correct: 5)
-# 486.505 on full data set (correct: 486)
+# 4.9 on test data should round to 5
+# 486.505 on full data set should round to 486
 
 def round(num : Float) : Int
-  n = num.round(1, mode: :ties_away)
+  n = num.round(1)
   if n % 1 <= 0.5
     (n // 1).to_i
   else
