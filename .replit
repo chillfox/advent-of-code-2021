@@ -1,5 +1,5 @@
 run = "make run day=$(ls src/ | wc -w)"
-entrypoint = "src/day_10.cr"
+entrypoint = "src/day_11.cr"
 
 language="crystal"
 
