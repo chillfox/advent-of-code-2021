@@ -61,15 +61,16 @@ puts "Second Challenge"
 puts "########################################"
 puts "\n"
 
-# octopuses = dumbo.clone
+octopuses = dumbo.clone
 # flashes = 0
-# synchronized_flash = nil
-# 400.times do |i|
-#  octopuses = octopuses.map &.map { |e| e += 1 }
-#  octopuses = flash octopuses
-# flashes += octopuses.flatten.count 0
+synchronized_flash = 0
+1000.times do |i|
+  octopuses = octopuses.map &.map { |e| e += 1 }
+  octopuses = flash octopuses
+  # flashes += octopuses.flatten.count 0
 
-#  puts i + 1 if octopuses.flatten.count(0) == octopuses.flatten.size
-# end
+  synchronized_flash = i + 1 if octopuses.flatten.count(0) == octopuses.flatten.size
+  break if synchronized_flash > 0
+end
 
-# puts "The first synchronized flash occurs at #{synchronized_flash}"
+puts "The first synchronized flash occurs at #{synchronized_flash}"
